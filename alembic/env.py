@@ -6,7 +6,7 @@ from sqlalchemy import pool
 
 from app.settings.settings import postgres_db_settings as db_set
 from app.db.connection import Base
-from app.db.models import *
+from app.db.models import *  # noqa: F403
 
 
 config = context.config

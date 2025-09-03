@@ -5,6 +5,7 @@ from app.services.roles import RoleService
 from app.repositories.roles import RoleRepository
 from app.db.connection import AsyncSessionLocal
 
+
 async def get_db():
     async with AsyncSessionLocal() as db:
         yield db

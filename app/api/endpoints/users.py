@@ -7,7 +7,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 async def check():
     return {"msg": "Gello World"}
 
+
 @router.post("/")
 async def create_user():
     pass
-
