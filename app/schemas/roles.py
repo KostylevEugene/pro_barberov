@@ -15,3 +15,7 @@ class CreateUserRole(BaseModel):
 
 class UserRole(CreateUserRole):
     id: int
+
+
+class EditUserRole(CreateUserRole):
+    pass

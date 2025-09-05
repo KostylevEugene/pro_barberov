@@ -17,6 +17,10 @@ class AbstractRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    async def update_by_id():
+        raise NotImplementedError
+
+    @abstractmethod
     async def delete():
         raise NotImplementedError
 
@@ -43,6 +47,22 @@ class GeneralRepository(AbstractRepository):
             select(self.model).where(self.model.id == model_id)
         )
         return result.scalars().first()
+
+    async def update_by_id(self, model_id: int, **data):
+        instance = await self.get_by_id(model_id=model_id)
+
+        if not instance:
+            return None
+
+        for key, value in data.items():
+            if hasattr(instance, key):
+                setattr(instance, key, value)
+
+        self.session.add(instance)
+        await self.session.commit()
+        await self.session.refresh(instance)
+
+        return instance
 
     async def delete(self, model_id: int):
         await self.session.execute(
